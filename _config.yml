@@ -105,6 +105,9 @@ service-worker: true
 friends: [
     {
       {
+        title: "博客园·Int_J",
+        href: "http://www.cnblogs.com/Soulland/"
+    },{
         title: "简书·BY",
         href: "https://www.jianshu.com/users/fcb6cae87817/timeline"
     },{
