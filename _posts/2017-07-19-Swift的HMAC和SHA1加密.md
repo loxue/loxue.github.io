@@ -1,14 +1,4 @@
----
-layout:     post
-title:      Swift的HMAC和SHA1加密
-subtitle:   swift中利用HMAC的SHA1对文本进行加密
-date:       2017-07-19
-author:     BY
-header-img: img/post-bg-hacker.jpg
-catalog: true
-tags:
-    - Swift
----
+
 
 >HMAC是密钥相关的哈希运算消息认证码（Hash-based Message Authentication Code）。 HMAC运算利用哈希算法，以一个密钥和一个消息为输入，生成一个消息摘要作为输出。也就是说HMAC通过将哈希算法(SHA1, MD5)与密钥进行计算生成摘要。
 

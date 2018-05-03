@@ -1,31 +1,12 @@
----
-layout:     post
-title:      ReactiveCocoa 基础
-subtitle:   函数式编程框架 ReactiveCocoa 基础入门
-date:       2016-12-26
-author:     BY
-header-img: img/post-bg-ios9-web.jpg
-catalog: true
-tags:
-    - iOS
-    - ReactiveCocoa
-    - 函数式编程
-    - 开源框架
----
-
 # ReactiveCocoa基础
->本文修改自[最快让你上手ReactiveCocoa之基础篇](http://www.jianshu.com/p/87ef6720a096)
->
->有关对 **ReactiveCocoa** 的看法可以看一下唐巧的这篇[ReactiveCocoa 讨论会](https://gold.xitu.io/entry/568bd2ae60b2e57ba2cd2c7b)
 
-
+> 有关对 **ReactiveCocoa** 的看法可以看一下唐巧的这篇[ReactiveCocoa 讨论会](https://gold.xitu.io/entry/568bd2ae60b2e57ba2cd2c7b)
 
 ![ReactiveCocoa思维导图](http://ww2.sinaimg.cn/large/006y8lVagw1fb7g0gukk8j30m90rl78j.jpg)
 
-
 # ReactiveCocoa简介
 
-[![](http://ww1.sinaimg.cn/large/006y8lVagw1fb7g6on3iwj30c2029q2z.jpg)](https://github.com/ReactiveCocoa/ReactiveCocoa)
+[![img](http://ww1.sinaimg.cn/large/006y8lVagw1fb7g6on3iwj30c2029q2z.jpg)](https://github.com/ReactiveCocoa/ReactiveCocoa)
 
 ReactiveCocoa（简称为RAC）,是由Github开源的一个应用于iOS和OS开发的新框架,Cocoa是苹果整套框架的简称，因此很多苹果框架喜欢以Cocoa结尾。
 
@@ -36,7 +17,6 @@ ReactiveCocoa（简称为RAC）,是由Github开源的一个应用于iOS和OS开�
 ReactiveCocoa为事件提供了很多处理方法，而且利用RAC处理事件很方便，可以把要处理的事情，和监听的事情的代码放在一起，这样非常方便我们管理，就不需要跳到对应的方法里。
 
 非常符合我们开发中高聚合，低耦合的思想。
-
 
 # ReactiveCocoa编程思想
 
@@ -56,6 +36,7 @@ ReactiveCocoa为事件提供了很多处理方法，而且利用RAC处理事件�
 
 ```
 make.add(1).add(2).sub(5).muilt(-4).divide(4);
+
 ```
 
 `特点`：方法的返回值是block,block必须有返回值（本身对象），block参数（需要操作的值）
@@ -67,16 +48,15 @@ make.add(1).add(2).sub(5).muilt(-4).divide(4);
 NSObject+Caculator.h
 
 ```
-# import <Foundation/Foundation.h>
-
+# import <Foundation/Foundation.h> 
 @class CaculatorMaker;
 
 @interface NSObject (Caculator)
 
-// 计算
-+ (int)makeCaculators:(void (^)(CaculatorMaker *))block;
+// 计算 + (int)makeCaculators:(void (^)(CaculatorMaker *))block;
                        
 @end
+
 ```
 
 NSObject+Caculator.m
@@ -94,13 +74,13 @@ NSObject+Caculator.m
 }
 
 @end
+
 ```
 
 CaculatorMaker.h
 
 ```
-# import <Foundation/Foundation.h>
-
+# import <Foundation/Foundation.h> 
 @class CaculatorMaker;
 
 typedef CaculatorMaker *(^CasulatorBlock)(int);
@@ -109,21 +89,20 @@ typedef CaculatorMaker *(^CasulatorBlock)(int);
 
 @property (nonatomic, assign) int result;
 
-// 算数方法
-- (CaculatorMaker *(^)(int))add;
+// 算数方法 - (CaculatorMaker *(^)(int))add;
 - (CasulatorBlock)sub;
 - (CasulatorBlock)muilt;
 - (CasulatorBlock)divide;
 
 
 @end
+
 ```
 
 CaculatorMaker.m
 
 ```
-# import "CaculatorMaker.h"
-
+# import "CaculatorMaker.h" 
 @implementation CaculatorMaker
 
 - (CaculatorMaker *(^)(int))add {
@@ -167,6 +146,7 @@ CaculatorMaker.m
 }
 
 @end
+
 ```
 
 使用：
@@ -180,10 +160,8 @@ int result = [NSObject makeCaculators:^(CaculatorMaker *make) {
     }];
     
     NSLog(@"%d", result);
+
 ```
-
-
-
 
 #### 函数式编程思想
 
@@ -211,13 +189,13 @@ int result = [NSObject makeCaculators:^(CaculatorMaker *make) {
     }] isEqule];
     
     NSLog(@"%d", isqule);
+
 ```
 
 Calculator.h
 
 ```
-#import <Foundation/Foundation.h>
-
+#import <Foundation/Foundation.h> 
 @interface Calculator : NSObject
 
 @property (nonatomic, assign) BOOL isEqule;
@@ -229,13 +207,13 @@ Calculator.h
 - (Calculator *)equle:(BOOL (^)(int result))operation;
 
 @end
+
 ```
 
 Calculator.m
 
 ```
-#import "Calculator.h"
-
+#import "Calculator.h" 
 @implementation Calculator
 
 - (Calculator *)caculator:(int (^)(int))caculator {
@@ -255,11 +233,12 @@ Calculator.m
 }
 
 @end
+
 ```
+
 **ReactiveCocoa** 结合了这两种种编程风格：
 
 - **函数式编程**（Functional Programming）
-
 - **响应式编程**（Reactive Programming）
 
 所以，你可能听说过 **ReactiveCocoa** 被描述为函数响应式编程（FRP）框架。
@@ -267,12 +246,12 @@ Calculator.m
 以后使用RAC解决问题，就不需要考虑调用顺序，直接考虑结果，把每一次操作都写成一系列嵌套的方法中，使代码高聚合，方便管理。
 
 # 导入ReactiveCocoa
----
 
+------
 
->ReactiveCocoa的[GitHub地址](https://github.com/ReactiveCocoa/ReactiveCocoa)
+> ReactiveCocoa的[GitHub地址](https://github.com/ReactiveCocoa/ReactiveCocoa)
 
-#### Objective-C 
+#### Objective-C
 
 **ReactiveCocoa 2.5**版本以后改用了**Swift**，所以**Objective-C**项目需要导入**2.5版本**
 
@@ -287,14 +266,18 @@ use_frameworks!
 pod 'ReactiveCocoa', '~> 2.5'
 
 end
+
 ```
+
 PS:新版本的`CocoaPods`需要加入
 
 ```
 target 'YouProjectName' do 
 ... 
 end
+
 ```
+
 这句话来限定项目，否则导入失败。
 
 #### Swift
@@ -311,7 +294,9 @@ pod 'ReactiveCocoa'
 
 end
 
+
 ```
+
 使用时在[全局头文件](http://www.jianshu.com/p/587b83b6665c)导入头文件即可
 
 `PrefixHeader.pch`
@@ -323,13 +308,14 @@ end
 #import <ReactiveCocoa/ReactiveCocoa.h>
 
 #endif
+
 ```
 
 # ReactiveCocoa常见类
 
 #### RACSiganl 信号类
 
->信号类,一般表示将来有数据传递，只要有数据改变，信号内部接收到数据，就会马上发出数据。
+> 信号类,一般表示将来有数据传递，只要有数据改变，信号内部接收到数据，就会马上发出数据。
 
 注意：
 
@@ -381,39 +367,42 @@ end
         // block调用时刻：每当有信号发出数据，就会调用block.
         NSLog(@"接收到数据:%@",x);
     }];
+
 ```
 
 #### RACSubscriber
->表示订阅者的意思，用于发送信号，这是一个协议，不是一个类，只要遵守这个协议，并且实现方法才能成为订阅者。通过create创建的信号，都有一个订阅者，帮助他发送数据。
+
+> 表示订阅者的意思，用于发送信号，这是一个协议，不是一个类，只要遵守这个协议，并且实现方法才能成为订阅者。通过create创建的信号，都有一个订阅者，帮助他发送数据。
 
 #### RACDisposable
 
->用于取消订阅或者清理资源，当信号发送完成或者发送错误的时候，就会自动触发它。
+> 用于取消订阅或者清理资源，当信号发送完成或者发送错误的时候，就会自动触发它。
 
 **使用场景**：不想监听某个信号时，可以通过它主动取消订阅信号。
 
 #### RACSubject
->RACSubject:信号提供者，自己可以充当信号，又能发送信号。
+
+> RACSubject:信号提供者，自己可以充当信号，又能发送信号。
 
 **使用场景**:通常用来代替代理，有了它，就不必要定义代理了。
 
 #### **RACReplaySubject**
 
->重复提供信号类，RACSubject的子类。
+> 重复提供信号类，RACSubject的子类。
 
 `RACReplaySubject`与`RACSubject`区别:
 
- `RACReplaySubject`可以先发送信号，在订阅信号，`RACSubject`就不可以。
+`RACReplaySubject`可以先发送信号，在订阅信号，`RACSubject`就不可以。
 
- **使用场景一**:如果一个信号每被订阅一次，就需要把之前的值重复发送一遍，使用重复提供信号类。
- 
- **使用场景二**:可以设置capacity数量来限制缓存的value的数量,即只缓充最新的几个值。
- 
- **ACSubject** 和 **RACReplaySubject** 简单使用：
- 
- **ACSubject**
- 
- ```
+**使用场景一**:如果一个信号每被订阅一次，就需要把之前的值重复发送一遍，使用重复提供信号类。
+
+**使用场景二**:可以设置capacity数量来限制缓存的value的数量,即只缓充最新的几个值。
+
+**ACSubject** 和 **RACReplaySubject** 简单使用：
+
+**ACSubject**
+
+```
      // RACSubject使用步骤
     // 1.创建信号 [RACSubject subject]，跟RACSiganl不一样，创建信号时没有block。
     // 2.订阅信号 - (RACDisposable *)subscribeNext:(void (^)(id x))nextBlock
@@ -438,9 +427,10 @@ end
     // 3.发送信号
     NSLog(@"发送信号");
     [subject sendNext:@"1"];
- ```
- 
- ```
+
+```
+
+```
      // RACReplaySubject使用步骤:
     // 1.创建信号 [RACSubject subject]，跟RACSiganl不一样，创建信号时没有block。
     // 2.可以先订阅信号，也可以先发送信号。
@@ -475,15 +465,13 @@ end
         
         NSLog(@"第二个订阅者接收到的数据%@",x);
     }];
- ```
+
+```
 
 **RACSubject**替换代理（与block类似）
 
 ```
-// 需求:
-    // 1.给当前控制器添加一个按钮，modal到另一个控制器界面
-    // 2.另一个控制器view中有个按钮，点击按钮，通知当前控制器
-
+// 需求:     // 1.给当前控制器添加一个按钮，modal到另一个控制器界面     // 2.另一个控制器view中有个按钮，点击按钮，通知当前控制器 
 步骤一：在第二个控制器.h，添加一个RACSubject代替代理。
 @interface TwoViewController : UIViewController
 
@@ -494,13 +482,9 @@ end
 步骤二：监听第二个控制器按钮点击
 @implementation TwoViewController
 - (IBAction)notice:(id)sender {
-    // 通知第一个控制器，告诉它，按钮被点了
-
-     // 通知代理
-     // 判断代理信号是否有值
-    if (self.delegateSignal) {
-        // 有值，才需要通知
-        [self.delegateSignal sendNext:nil];
+    // 通知第一个控制器，告诉它，按钮被点了 
+     // 通知代理      // 判断代理信号是否有值     if (self.delegateSignal) {
+        // 有值，才需要通知         [self.delegateSignal sendNext:nil];
     }
 }
 @end
@@ -509,33 +493,29 @@ end
 @implementation OneViewController 
 - (IBAction)btnClick:(id)sender {
 
-    // 创建第二个控制器
-    TwoViewController *twoVc = [[TwoViewController alloc] init];
+    // 创建第二个控制器     TwoViewController *twoVc = [[TwoViewController alloc] init];
 
-    // 设置代理信号
-    twoVc.delegateSignal = [RACSubject subject];
+    // 设置代理信号     twoVc.delegateSignal = [RACSubject subject];
 
-    // 订阅代理信号
-    [twoVc.delegateSignal subscribeNext:^(id x) {
+    // 订阅代理信号     [twoVc.delegateSignal subscribeNext:^(id x) {
 
         NSLog(@"点击了通知按钮 %@", x);
     }];
 
-    // 跳转到第二个控制器
-    [self presentViewController:twoVc animated:YES completion:@"hi"];
+    // 跳转到第二个控制器     [self presentViewController:twoVc animated:YES completion:@"hi"];
 
 }
 @end
+
 ```
 
 #### RACTuple
 
->元组类,类似NSArray,用来包装值.(`@[key, value]`)
-
+> 元组类,类似NSArray,用来包装值.(`@[key, value]`)
 
 #### RACSequence
 
->RAC中的集合类，用于代替NSArray,NSDictionary,可以使用它来快速遍历数组和字典。
+> RAC中的集合类，用于代替NSArray,NSDictionary,可以使用它来快速遍历数组和字典。
 
 使用场景：字典转模型
 
@@ -601,40 +581,41 @@ end
         
     }] array];
 
+
 ```
 
 #### RACCommand
 
->RAC中用于处理事件的类，可以把事件如何处理,事件中的数据如何传递，包装到这个类中，他可以很方便的监控事件的执行过程。
+> RAC中用于处理事件的类，可以把事件如何处理,事件中的数据如何传递，包装到这个类中，他可以很方便的监控事件的执行过程。
 
- 一、RACCommand使用步骤:
- 
- 1. 创建命令 initWithSignalBlock:(RACSignal * (^)(id input))signalBlock
- 2. 在signalBlock中，创建RACSignal，并且作为signalBlock的返回值
- 3. 执行命令 - (RACSignal *)execute:(id)input
+一、RACCommand使用步骤:
 
- 二、RACCommand使用注意:
- 
- 1. signalBlock必须要返回一个信号，不能传nil.
- 2. 如果不想要传递信号，直接创建空的信号[RACSignal empty];
- 3. RACCommand中信号如果数据传递完，必须调用[subscriber sendCompleted]，这时命令才会执行完毕，否则永远处于执行中。
- 4. RACCommand需要被强引用，否则接收不到RACCommand中的信号，因此RACCommand中的信号是延迟发送的。
+1. 创建命令 initWithSignalBlock:(RACSignal * (^)(id input))signalBlock
+2. 在signalBlock中，创建RACSignal，并且作为signalBlock的返回值
+3. 执行命令 - (RACSignal *)execute:(id)input
 
- 三、RACCommand设计思想：
- 
- 内部signalBlock为什么要返回一个信号，这个信号有什么用。
- 
- 1. 在RAC开发中，通常会把网络请求封装到RACCommand，直接执行某个RACCommand就能发送请求。
- 2. 当RACCommand内部请求到数据的时候，需要把请求的数据传递给外界，这时候就需要通过signalBlock返回的信号传递了。
+二、RACCommand使用注意:
 
- 四、如何拿到RACCommand中返回信号发出的数据。
- 
- 1. RACCommand有个执行信号源executionSignals，这个是signal of signals(信号的信号),意思是信号发出的数据是信号，不是普通的类型。
- 2. 订阅executionSignals就能拿到RACCommand中返回的信号，然后订阅signalBlock返回的信号，就能获取发出的值。
+1. signalBlock必须要返回一个信号，不能传nil.
+2. 如果不想要传递信号，直接创建空的信号[RACSignal empty];
+3. RACCommand中信号如果数据传递完，必须调用[subscriber sendCompleted]，这时命令才会执行完毕，否则永远处于执行中。
+4. RACCommand需要被强引用，否则接收不到RACCommand中的信号，因此RACCommand中的信号是延迟发送的。
 
- 五、监听当前命令是否正在执行executing
+三、RACCommand设计思想：
 
- 六、使用场景,监听按钮点击，网络请求
+内部signalBlock为什么要返回一个信号，这个信号有什么用。
+
+1. 在RAC开发中，通常会把网络请求封装到RACCommand，直接执行某个RACCommand就能发送请求。
+2. 当RACCommand内部请求到数据的时候，需要把请求的数据传递给外界，这时候就需要通过signalBlock返回的信号传递了。
+
+四、如何拿到RACCommand中返回信号发出的数据。
+
+1. RACCommand有个执行信号源executionSignals，这个是signal of signals(信号的信号),意思是信号发出的数据是信号，不是普通的类型。
+2. 订阅executionSignals就能拿到RACCommand中返回的信号，然后订阅signalBlock返回的信号，就能获取发出的值。
+
+五、监听当前命令是否正在执行executing
+
+六、使用场景,监听按钮点击，网络请求
 
 使用:
 
@@ -693,37 +674,35 @@ end
     
     // 5.执行命名
     [self.command execute:@1];
+
 ```
 
 #### RACMulticastConnection
->用于当一个信号，被多次订阅时，为了保证创建信号时，避免多次调用创建信号中的block，造成副作用，可以使用这个类处理。
+
+> 用于当一个信号，被多次订阅时，为了保证创建信号时，避免多次调用创建信号中的block，造成副作用，可以使用这个类处理。
 
 注意：RACMulticastConnection通过RACSignal的-publish或者-muticast:方法创建.
 
-
-
 RACMulticastConnection使用步骤:
 
-1. 创建信号 + (RACSignal *)createSignal:(RACDisposable * (^)(id<RACSubscriber> subscriber))didSubscribe
+1. 创建信号 + (RACSignal *)createSignal:(RACDisposable * (^)(id subscriber))didSubscribe
 2. 创建连接 RACMulticastConnection *connect = [signal publish];
 3. 订阅信号,注意：订阅的不在是之前的信号，而是连接的信号。 [connect.signal subscribeNext:nextBlock]
 4. 连接 [connect connect]
 
 RACMulticastConnection底层原理:
 
-1. 创建connect，connect.sourceSignal -> RACSignal(原始信号)  connect.signal -> RACSubject
+1. 创建connect，connect.sourceSignal -> RACSignal(原始信号) connect.signal -> RACSubject
 2. 订阅connect.signal，会调用RACSubject的subscribeNext，创建订阅者，而且把订阅者保存起来，不会执行block。
 3. [connect connect]内部会订阅RACSignal(原始信号)，并且订阅者是RACSubject
-	1. 订阅原始信号，就会调用原始信号中的didSubscribe
-	2. didSubscribe，拿到订阅者调用sendNext，其实是调用RACSubject的sendNext
+   1. 订阅原始信号，就会调用原始信号中的didSubscribe
+   2. didSubscribe，拿到订阅者调用sendNext，其实是调用RACSubject的sendNext
 4. RACSubject的sendNext,会遍历RACSubject所有订阅者发送信号。
-	- 因为刚刚第二步，都是在订阅RACSubject，因此会拿到第二步所有的订阅者，调用他们的nextBlock
-
+   - 因为刚刚第二步，都是在订阅RACSubject，因此会拿到第二步所有的订阅者，调用他们的nextBlock
 
 需求：假设在一个信号中发送请求，每次订阅一次都会发送请求，这样就会导致多次请求。
 
 解决：使用RACMulticastConnection就能解决.
-
 
 问题：每次订阅一次都会发送请求
 
@@ -748,6 +727,7 @@ RACSignal *signal = [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> s
     
     NSLog(@"接受数据: %@", x);
 }];
+
 ```
 
 输出：
@@ -757,7 +737,9 @@ RACSignal *signal = [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> s
 2016-12-28 11:37:04.398 ReactiveCacoa[1505:340573] 接受数据: 1
 2016-12-28 11:37:04.398 ReactiveCacoa[1505:340573] 发送请求
 2016-12-28 11:37:04.398 ReactiveCacoa[1505:340573] 接受数据: 1
+
 ```
+
 可以发现每次订阅都会重新发送请求.
 
 下面我们使用RACMulticastConnection：
@@ -789,6 +771,7 @@ RACMulticastConnection *connect = [signal publish];
 // 连接、激活信号
 [connect connect];
 
+
 ```
 
 输出：
@@ -797,27 +780,29 @@ RACMulticastConnection *connect = [signal publish];
 2016-12-28 11:37:04.399 ReactiveCacoa[1505:340573] 发送请求
 2016-12-28 11:37:04.399 ReactiveCacoa[1505:340573] 订阅者1信号: 1
 2016-12-28 11:37:04.399 ReactiveCacoa[1505:340573] 订阅者2信号: 1
+
 ```
+
 #### RACScheduler
->RAC中的队列，用GCD封装的。
+
+> RAC中的队列，用GCD封装的。
 
 #### RACUnit
->表⽰stream不包含有意义的值,也就是看到这个，可以直接理解为nil.
+
+> 表⽰stream不包含有意义的值,也就是看到这个，可以直接理解为nil.
 
 #### RACEven
->把数据包装成信号事件(signal event)。它主要通过RACSignal的-materialize来使用，然并卵。
 
+> 把数据包装成信号事件(signal event)。它主要通过RACSignal的-materialize来使用，然并卵。
 
 # ReactiveCocoa开发中常见用法
 
-1. 替换代理			
+1. 替换代理
 2. 替换KVO
 3. 监听事件
 4. 替换通知
 5. 监听文本框文字改变
 6. 统一处理多个网络请求
-
-
 
 #### 替换代理：
 
@@ -844,6 +829,7 @@ RACMulticastConnection *connect = [signal publish];
         }];
     }
 }
+
 ```
 
 `RedViewController.m` 中的按钮事件
@@ -853,6 +839,7 @@ RACMulticastConnection *connect = [signal publish];
     
     NSLog(@"!");
 }
+
 ```
 
 #### 替换KVO
@@ -866,6 +853,7 @@ RACMulticastConnection *connect = [signal publish];
 
     NSLog(@"slider value Change：%@", x);
 }];
+
 ```
 
 #### 替换通知
@@ -885,6 +873,7 @@ RACMulticastConnection *connect = [signal publish];
   subscribeNext:^(id x) {
      NSLog(@"Notification received");
 }];
+
 ```
 
 #### 监听事件
@@ -897,8 +886,8 @@ RACMulticastConnection *connect = [signal publish];
     
     NSLog(@"btnTap");
 }];
-```
 
+```
 
 #### 监听 textField 文字变化
 
@@ -909,6 +898,7 @@ RACMulticastConnection *connect = [signal publish];
         
 	NSLog(@"textField change: %@", x);
 }];
+
 ```
 
 #### 统一处理多个网络请求
@@ -954,17 +944,17 @@ RACMulticastConnection *connect = [signal publish];
     NSLog(@"R1:%@, R2：%@ 完成！", r1, r2);
     
 }
-```
 
+```
 
 #### **注意**：
 
 - `替换KVO`和 `监听文本框文字改变` 方法在创建监听方法时就会执行一次。
-	
-	```
-2016-12-28 16:53:50.746 ReactiveCacoa[4956:1246592] slider value Change：0.5
-2016-12-28 16:53:50.748 ReactiveCacoa[4956:1246592] textField change:
-```
+
+  ```
+  2016-12-28 16:53:50.746 ReactiveCacoa[4956:1246592] slider value Change：0.5
+  2016-12-28 16:53:50.748 ReactiveCacoa[4956:1246592] textField change:
+
+  ```
 
 - 使用`rac_liftSelector`时 `@selector(updateWithR1:R2:) `中的方 **参数个数** 要与 **signal个数** 相同，否则会被断言Crash！
-

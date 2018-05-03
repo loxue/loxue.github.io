@@ -1,19 +1,3 @@
----
-layout:     post
-title:      CocoaPods公有仓库的创建
-subtitle:   手把手教你创建 CocoaPods 公有仓库
-date:       2017-03-08
-author:     BY
-header-img: img/post-bg-ios10.jpg
-catalog: true
-tags:
-    - iOS
-    - CocoaPods
-    - Git
----
-
-> 本文发布于 [BY Blog](http://qiubaiying.github.io)、[简书](http://www.jianshu.com/p/d2d98298b1b8) 转载请保留链接
-
 # 前言
 
 作为iOS开发者，CocoaPods的使用为我们开发带来了极大的便利。
@@ -21,21 +5,21 @@ tags:
 我们先来看看CocoaPods本地目录中有什么
 
 	$ cd ~/.cocoapods/repos/master
-	
+
 或者显示隐藏文件
 
 	$ defaults write com.apple.finder AppleShowAllFiles -boolean true ; killall Finder
-	
+
 然后进入 `~/.cocoapods/repos/master` 
 
 你会发现 `master` 是一个 git 仓库，输出仓库的远程地址，发现是一个GitHub仓库
 
 	$ git remote -v
-	
+
 	origin	https://github.com/CocoaPods/Specs.git (fetch)
 	origin	https://github.com/CocoaPods/Specs.git (push)
 
-	
+
 [![](https://ww4.sinaimg.cn/large/006tKfTcgy1fdgdi59dnnj31kw10247u.jpg)]()
 
 继续，我们进入`Specs`文件夹一直往里点
@@ -66,7 +50,7 @@ pod搜索 Specs 文件夹中的框架，输出框架信息
 我们在 CocoaPods 发布我们的框架时，就是要在 `master` 仓库中添加我们的仓库描述信息，然后push到远程仓库中。不过这个过程不用我们手动去操作，只需要通过`pod`命令进行操作即可。
 
 
-下面我们将一步步把我封装的这个简单的TextFiled控件 [BYPhoneNumTF](https://github.com/qiubaiying/BYPhoneNumTF) 上传到 Cocoapods 公有仓库中。
+下面我们将一步步把我封装的这个简单的TextFiled控件 BYPhoneNumTF上传到 Cocoapods 公有仓库中。
 
 # 正文
 
@@ -78,17 +62,17 @@ pod搜索 Specs 文件夹中的框架，输出框架信息
 等终端出现下面文字，CocoaPods 会发一个`确认邮件`到你的邮箱上，登录你的邮箱进行确认。
 
 	[!] Please verify the session by clicking the link in the verification email that has been sent to you_email@163.com
-	
+
 ![](https://ww3.sinaimg.cn/large/006tNbRwgy1fdeco0ndc9j30r10h3wgt.jpg)
 
 注册成功！
-	
+​	
 确认后再终端输入
 
 	pod trunk me
-	
+
 可以看到你的注册信息
-	
+​	
 ![](https://ww4.sinaimg.cn/large/006tNbRwgy1fdecs0z72oj30n004q3z2.jpg)
 
 #### 创建Git仓库
@@ -115,7 +99,7 @@ pod搜索 Specs 文件夹中的框架，输出框架信息
 在你的仓库目录下，使用终端命令创建
 
 	$ pod spec create BYPhoneNumTF
-	
+
 这时就会在你的仓库下生成 `BYPhoneNumTF.podspec` 文件
 
 ![](https://ww4.sinaimg.cn/large/006tNbRwgy1fdfioo1c4zj31bq0s20zn.jpg)
@@ -166,7 +150,7 @@ end
 	[!] The validator for Swift projects uses Swift 3.0 by default, if you are using a different version of swift you can use a `.swift-version` file to set the version for your Pod. For example to use Swift 2.3, run: 
 	    `echo "2.3" > .swift-version`.
 	You can use the `--no-clean` option to inspect any issue.
-	
+
 提示我们需要加`--allow-warnings`这么一句话，命令改为
 
 	$ pod lib lint --allow-warnings
@@ -186,15 +170,15 @@ end
 	$ git tag -a 1.0.0 -m '标签说明' 
 	推送到远程
 	$ git push origin --tags
-	
+
 #### 发布`.podspec`
 
 最后一步，发布项目的描述的文件 `BYPhoneNumTF.podspec` 
 
 在仓库目录下执行
-	
+​	
 	pod trunk push BYPhoneNumTF.podspec
-	
+
 将你的 `BYPhoneNumTF.podspec` 发布到公有的speecs上,这一步其实做了很多操作,包括 
 
 1. 更新本地 pods 库 `~/.cocoaPods.repo/master`
@@ -218,7 +202,7 @@ end
 	 📅  March 7th, 01:39
 	 🌎  https://cocoapods.org/pods/BYPhoneNumTF
 	 👍  Tell your friends!
-	 
+
 说明发布成功，你就可以通过上面的URL: <https://cocoapods.org/pods/BYPhoneNumTF> 进入的Pods查看自己的仓库信息了.
 
 ![](https://ww3.sinaimg.cn/large/006tNbRwgy1fded7yh8ugj31kw19djyk.jpg)
@@ -230,7 +214,7 @@ end
 	$ pod setup
 
 查询仓库
-	
+​	
 	$ pod search BYPhoneNumTF
 ---
 	-> BYPhoneNumTF (1.0.0)

@@ -1,20 +1,6 @@
----
-layout:     post
-title:      ReactiveCocoa 进阶
-subtitle:   函数式编程框架 ReactiveCocoa 进阶
-date:       2017-01-06
-author:     BY
-header-img: img/post-bg-ios9-web.jpg
-catalog: true
-tags:
-    - iOS
-    - ReactiveCocoa
-    - 函数式编程
-    - 开源框架
----
 # 前言
 
->在[上篇文章](http://qiubaiying.github.io/2016/12/26/ReactiveCocoa-基础/)中介绍了**ReactiveCocoa**的基础知识,接下来我们来深入介绍**ReactiveCocoa**及其在**MVVM**中的用法。
+>在[上篇文章](http://loxue.github.io/2016-01-01-ReactiveCocoa-基础/)中介绍了**ReactiveCocoa**的基础知识,接下来我们来深入介绍**ReactiveCocoa**及其在**MVVM**中的用法。
 
 
 ![ReactiveCocoa进阶思维导图](https://ww3.sinaimg.cn/large/006y8lVagw1fbgye3re5xj30je0iomz8.jpg)
@@ -29,10 +15,6 @@ tags:
 运用的是Hook（钩子）思想，Hook是一种用于改变API(应用程序编程接口：方法)执行结果的技术.
 
 Hook用处：截获API调用的技术。
-
-有关Hook的知识可以看我的这篇博客[《Objective-C Runtime 的一些基本使用》](http://www.jianshu.com/p/ff114e69cc0a)中的 *更换代码的实现方法* 一节,
-
-Hook原理：在每次调用一个API返回结果之前，先执行你自己的方法，改变结果的输出。
 
 #### 操作方法
 
@@ -52,7 +34,7 @@ Hook原理：在每次调用一个API返回结果之前，先执行你自己的�
      3. 描述一个返回结果的信号，作为 `bindBlock` 的返回值。
      
      注意：在bindBlock中做信号结果的处理。
-- 	**bind方法参数**
+	 	**bind方法参数**
 	
 	**RACStreamBindBlock**:
 `typedef RACStream * (^RACStreamBindBlock)(id value, BOOL *stop);`
@@ -80,7 +62,7 @@ Hook原理：在每次调用一个API返回结果之前，先执行你自己的�
 
 
 	- 方式二:，使用RAC中 `bind` 方法做处理，在返回结果前，拼接。
-	  
+
 		这里需要手动导入`#import <ReactiveCocoa/RACReturnSignal.h>`，才能使用`RACReturnSignal`
 
 		```	
@@ -103,7 +85,7 @@ Hook原理：在每次调用一个API返回结果之前，先执行你自己的�
 		   NSLog(@"%@",x);
 		
 		}];
-
+	
 		```
 
 - **底层实现**
@@ -112,7 +94,7 @@ Hook原理：在每次调用一个API返回结果之前，先执行你自己的�
      3. 当源信号有内容发出，就会把内容传递到 `bindingBlock` 处理，调用`bindingBlock(value,stop)`
      4. 调用`bindingBlock(value,stop)`，会返回一个内容处理完成的信号`RACReturnSignal`。
      5. 订阅`RACReturnSignal`，就会拿到绑定信号的订阅者，把处理完成的信号内容发送出来。
-    
+      
      注意:不同订阅者，保存不同的nextBlock，看源码的时候，一定要看清楚订阅者是哪个。
 
 #### 映射
@@ -151,7 +133,7 @@ Hook原理：在每次调用一个API返回结果之前，先执行你自己的�
         
         NSLog(@"%@", x);
     }];
-    ```
+  ```
 - **底层实现**
 
      0. **flattenMap**内部调用 `bind` 方法实现的,**flattenMap**中block的返回值，会作为bind中bindBlock的返回值。
@@ -164,10 +146,9 @@ Hook原理：在每次调用一个API返回结果之前，先执行你自己的�
 ###### Map
 
 - **作用**
- 
-	把源信号的值映射成一个新的值
 
-	
+  把源信号的值映射成一个新的值
+
 - **使用步骤**
      1. 传入一个block,类型是返回对象，参数是 `value`
      2. `value`就是源信号的内容，直接拿到源信号的内容做处理
@@ -176,7 +157,7 @@ Hook原理：在每次调用一个API返回结果之前，先执行你自己的�
 - **使用**
 
 	监听文本框的内容改变，把结构重新映射成一个新值.
-     
+  
     ```
 	[[_textField.rac_textSignal map:^id(id value) {
        
@@ -187,7 +168,7 @@ Hook原理：在每次调用一个API返回结果之前，先执行你自己的�
         
         NSLog(@"%@", x);
     }];
-	```
+	  ```
 - **底层实现**:
      0. Map底层其实是调用 `flatternMa`p,`Map` 中block中的返回的值会作为 `flatternMap` 中block中的值
      1. 当订阅绑定信号，就会生成 `bindBlock` 
@@ -396,7 +377,7 @@ Hook原理：在每次调用一个API返回结果之前，先执行你自己的�
 	
 	1. 定义压缩信号，内部就会自动订阅signalA，signalB
 	2. 每当signalA或者signalB发出信号，就会判断signalA，signalB有没有发出个信号，有就会把每个信号 第一次 发出的值包装成元组发出
-	     
+	
 - **使用**
 
 	```
@@ -435,7 +416,7 @@ Hook原理：在每次调用一个API返回结果之前，先执行你自己的�
 	)
 	```
 	
-	
+	​
 ###### combineLatest
 - **作用** 
 	
@@ -443,9 +424,9 @@ Hook原理：在每次调用一个API返回结果之前，先执行你自己的�
 
 - **底层实现**
 	
- 	1. 当组合信号被订阅，内部会自动订阅signalA，signalB,必须两个信号都发出内容，才会被触发。
- 	2. 并且把两个信号的 最后一次 发送的值组合成元组发出。
-	     
+		1. 当组合信号被订阅，内部会自动订阅signalA，signalB,必须两个信号都发出内容，才会被触发。
+		2. 并且把两个信号的 最后一次 发送的值组合成元组发出。
+	
 - **使用**
 
 	```
@@ -504,9 +485,9 @@ Hook原理：在每次调用一个API返回结果之前，先执行你自己的�
 	把信号发出元组的值聚合成一个值
 - **底层实现**
 	
- 	1. 订阅聚合信号，
- 	2. 每次有内容发出，就会执行reduceblcok，把信号内容转换成reduceblcok返回的值。
-	     
+		1. 订阅聚合信号，
+		2. 每次有内容发出，就会执行reduceblcok，把信号内容转换成reduceblcok返回的值。
+	
 - **使用**
 
      常见的用法，（先组合在聚合）`combineLatest:(id<NSFastEnumeration>)signals reduce:(id (^)())reduceBlock`
@@ -518,27 +499,27 @@ Hook原理：在每次调用一个API返回结果之前，先执行你自己的�
 
 
 
-	```
+	​```
 	    RACSignal *signalA = [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
-        
-        [subscriber sendNext:@"A1"];
-        [subscriber sendNext:@"A2"];
-        
-        return nil;
-    }];
-    
-    RACSignal *signalB = [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
-        
-        [subscriber sendNext:@"B1"];
-        [subscriber sendNext:@"B2"];
-        [subscriber sendNext:@"B3"];
-        
-        return nil;
-    }];
-    
-    
+	    
+	    [subscriber sendNext:@"A1"];
+	    [subscriber sendNext:@"A2"];
+	    
+	    return nil;
+	}];
+	
+	RACSignal *signalB = [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+	    
+	    [subscriber sendNext:@"B1"];
+	    [subscriber sendNext:@"B2"];
+	    [subscriber sendNext:@"B3"];
+	    
+	    return nil;
+	}];
+
+
     RACSignal *reduceSignal = [RACSignal combineLatest:@[signalA, signalB] reduce:^id(NSString *str1, NSString *str2){
-        
+
         return [NSString stringWithFormat:@"%@ %@", str1, str2];
     }];
     
@@ -549,11 +530,11 @@ Hook原理：在每次调用一个API返回结果之前，先执行你自己的�
     
     // 输出
     2017-01-03 15:42:41.803 ReactiveCocoa进阶[4248:1264674] A2 B1
-	2017-01-03 15:42:41.803 ReactiveCocoa进阶[4248:1264674] A2 B2
-	2017-01-03 15:42:41.803 ReactiveCocoa进阶[4248:1264674] A2 B3
+    2017-01-03 15:42:41.803 ReactiveCocoa进阶[4248:1264674] A2 B2
+    2017-01-03 15:42:41.803 ReactiveCocoa进阶[4248:1264674] A2 B3
     
-	```
-	
+    ​```
+
 #### 过滤
 
 过滤就是过滤信号中的 特定值 ，或者过滤指定 发送次数 的信号。
@@ -610,15 +591,16 @@ Hook原理：在每次调用一个API返回结果之前，先执行你自己的�
 	
 - **使用**
 
-	```
+  ```
   	// 内部调用filter过滤，忽略掉字符为 @“1”的值
-[[_textField.rac_textSignal ignore:@"1"] subscribeNext:^(id x) {
+  [[_textField.rac_textSignal ignore:@"1"] subscribeNext:^(id x) {
 
- 	 NSLog(@"%@",x);
-}];
+  	 NSLog(@"%@",x);
+  }];
+  ```
 
 
-	```
+	​```
 
 ###### distinctUntilChanged
 
@@ -635,7 +617,7 @@ Hook原理：在每次调用一个API返回结果之前，先执行你自己的�
     }];
 	```
 	
-###### skip	
+	##### skip	
 
 - **作用**
 
@@ -685,7 +667,7 @@ Hook原理：在每次调用一个API返回结果之前，先执行你自己的�
 	
 	前提条件，订阅者必须调用完成 `sendCompleted`，因为只有完成，就知道总共有多少信号.
 	
-- **使用**	
+	 **使用**	
 
 	```
 	RACSubject *subject = [RACSubject subject] ;
@@ -709,7 +691,7 @@ Hook原理：在每次调用一个API返回结果之前，先执行你自己的�
 - **作用**
 
 	获取信号直到某个信号执行完成
-- **使用**	
+	 **使用**	
 
 	```
 	// 监听文本框的改变直到当前对象被销毁
@@ -725,7 +707,7 @@ Hook原理：在每次调用一个API返回结果之前，先执行你自己的�
 
 	switchToLatest：只能用于信号中的信号
 
-- **使用**	
+	 **使用**	
 
 	```
 	RACSubject *signalOfSignals = [RACSubject subject];
@@ -746,7 +728,7 @@ Hook原理：在每次调用一个API返回结果之前，先执行你自己的�
 秩序包括 `doNext` 和 `doCompleted` 这两个方法，主要是在 执行`sendNext` 或者 `sendCompleted`之前，先执行这些方法中Block。
 
 ###### doNext 
-	
+
 执行`sendNext`之前，会先执行这个`doNext`的 Block
 
 ###### doCompleted
@@ -1159,8 +1141,8 @@ Hook原理：在每次调用一个API返回结果之前，先执行你自己的�
     
     return _loginViewModel;
 }
-```	
-		
+```
+
 `LoginViewModel.h`
 
 ```
@@ -1515,4 +1497,3 @@ end
 
 ```
 
->最后附上GitHub：<https://github.com/qiubaiying/ReactiveCocoa_Demo>

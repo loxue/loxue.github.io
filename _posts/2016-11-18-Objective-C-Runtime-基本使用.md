@@ -10,7 +10,7 @@ tags:
     - Obj-C
     - Runtime
     - iOS
---- 
+​--- 
 
 # 前言
 
@@ -185,7 +185,7 @@ for (int i = 0; i < count; i++) {
 
 ```
 
-`class_copyMethodList([classA class], &count)` 传入元类和计数器地址，返回方法列表。这里注意，返回的是`Method`结构体类型的C数组，`Method`类型我们在[上篇文章](http://www.jianshu.com/p/a36bfc976b8e)中已经详细说明，
+`class_copyMethodList([classA class], &count)` 传入元类和计数器地址，返回方法列表。这里注意，返回的是`Method`结构体类型的C数组，`Method`类型我们在上篇文章中已经详细说明，
 
 ```
 typedef struct objc_method *Method;
@@ -225,7 +225,7 @@ An object (whether statically typed or typed id) @
 
 #### 获取类中的属性
 
-在 [上篇文章](http://www.jianshu.com/p/a36bfc976b8e) 的 `Property` 中我们也提到了获取类中的属性的方法，如下：
+在 上篇文章 的 `Property` 中我们也提到了获取类中的属性的方法，如下：
 
 ```
 id LenderClass = objc_getClass("ClassA");//获取classA 的元类同[ClassA class]
@@ -717,8 +717,6 @@ while (cls) {
 这个循环是则获取父类中的属性：当前类的属性遍历结束之后，指向父类，若父类存在则在继续遍历属性，否则就退出循环。
 
 当然，这个方法只是介绍了利用runtime进行字典转模型的原理,实际中还有很多需要考虑的细节，项目中我还是推荐使用像[YYModel](https://github.com/ibireme/YYModel)这些比较成熟而且安全的模型框架。
-
-关于快速字典转模型可以参考我写的一篇[《快速完成JSON\字典转模型 For YYModel》](http://www.jianshu.com/p/b7d8cf650722)。
 
 
 

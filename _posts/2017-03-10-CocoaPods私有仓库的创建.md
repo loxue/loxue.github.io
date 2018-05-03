@@ -1,23 +1,3 @@
----
-layout:     post
-title:      CocoaPods私有仓库的创建
-subtitle:   继续带你创建 CocoaPods 私有有仓库
-date:       2017-03-10
-author:     BY
-header-img: img/post-bg-iWatch.jpg
-catalog: true
-tags:
-    - iOS
-    - CocoaPods
-    - Git
----
-
-> 本文发布于 [BY Blog](http://qiubaiying.github.io)、[简书](http://www.jianshu.com/p/d2d98298b1b8) 转载请保留链接
-> 
-> 上一篇文章 [《CocoaPods公有仓库的创建》](http://qiubaiying.top/2017/03/08/CocoaPods公有仓库的创建/)
-
-# 前言
-
 最近参照了网上一大堆 CocoaPods私有仓库 的教程，按教程操作得到的pod仓库里面是这样的~
 
 ![](https://ww3.sinaimg.cn/large/006tKfTcgy1fdgexnidglj30yq0eqn0r.jpg)
@@ -26,7 +6,7 @@ tags:
 
 虽然也能用，但是和CocoaPods本身的结构设计就不相符。
 
-在上一篇[《CocoaPods公有仓库的创建》](http://qiubaiying.top/2017/03/08/CocoaPods公有仓库的创建/)中我们了解到，`master` 目录中只存放 代码库 的描述文件，而不是存放代码。就像这样
+在上一篇[《CocoaPods公有仓库的创建》](http://loxue.top/2017-03-08-CocoaPods公有仓库的创建/)中我们了解到，`master` 目录中只存放 代码库 的描述文件，而不是存放代码。就像这样
 
 ![](https://ww4.sinaimg.cn/large/006tKfTcgy1fdgf4l54rxj30ya09ujst.jpg)
 
@@ -54,7 +34,7 @@ tags:
 回到终端，将这个远程的私有版本仓库添加到本地，`repo` 就是 repository 储存库的缩写。
 
 	$ pod repo add MyRepo https://git.oschina.net/baiyingqiu/MyRepo.git
-	
+
 查看在 Finder 目录 `~/.cocoapods/repos`， 可以发现增加了一个 MyRepo 的储存库
 
 ![](https://ww2.sinaimg.cn/large/006tKfTcgy1fdgfyfl6v6j316y0piwhz.jpg)
@@ -115,7 +95,7 @@ end
 然后开始验证我们的仓库配置是否正确，并按照要求进行修改
 
 	$ pod lib lint
-	
+
 一般出现错误警告，需要添加 `--private` 或者 `--allow-warnings`，就可以通过验证
 
 	$ pod lib lint --private
@@ -123,11 +103,11 @@ end
 验证成功后出现
 
 	 -> MyAdditions (0.0.1)
-	 
+
 	MyAdditions passed validation.
-	
+
 #### 将描述文件推送到版本库
-	
+
 将项目打上标签推到远程仓库，标签号 和 版本号对应 都是`0.0.1`
 
 最后将我们的代码仓库的描述信息，push 到我们的版本仓库中
@@ -137,15 +117,15 @@ end
 这时会对远程仓库进行验证，成功的话就会在 `~/.cocoapods/repos/MyRep`中发现新增的仓库描述信息了
 
 ![](https://ww3.sinaimg.cn/large/006tKfTcgy1fdgo62knrwj31ko0s8784.jpg)
-	
+​	
 若是出现错误信息
 
 	[!] The repo `MyRepo` at `../.cocoapods/repos/MyRepo` is not clean
-	
+
 更新下我们的版本库，
 
 	$ pod repo update MyRepo
-	
+​	
 
 再继续上传即可。
 
@@ -167,7 +147,7 @@ end
 	   - Source:   https://git.oschina.net/baiyingqiu/MyAdditions.git
 	   - Versions: 0.0.1 [MyRepo repo]
 	(END)
-	
+
 ### 私人pod库的使用
 
 使用私人pod库的需要在`Podflie`中添加这句话，指明你的版本库地址。
@@ -175,7 +155,7 @@ end
 	source ‘https://git.oschina.net/baiyingqiu/MyRepo.git’
 **注意**是版本库的地址，而不是代码库的地址，很多教程都把我搞晕了~
 
-	
+
 若有还使用了公有的pod库，需要把公有库地址也带上
 
 	source ‘https://github.com/CocoaPods/Specs.git’
@@ -217,13 +197,4 @@ end
 - 在 版本库 中搜索我们`pod ‘MyAdditions’` 的 `MyAdditions.podspec` 文件。
 - 根据 `MyAdditions.podspec` 文件中描述的源码地址下载并整合到项目中
 
-
-
-# 结语
-
-通过 [《CocoaPods私有仓库的创建》](http://qiubaiying.top/2017-03-10-CocoaPods私有仓库的创建/) 和 [《CocoaPods公有仓库的创建](http://qiubaiying.top/2017/03/08/CocoaPods公有仓库的创建/)》这两篇文章，相信大家对CocoaPods的工作原理都有了更深层次的了解。
-
-在写博客和和创建的过程中，踩了不少的坑（😀前人教程留下的），很多的东西只有自己操作完才能真正的领会。
-
-最后，如果本文有什么错误或者有什么不同的观点欢迎提出交流。😉
 

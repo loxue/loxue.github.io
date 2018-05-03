@@ -1,16 +1,4 @@
----
-layout:     post
-title:      Objective-C Runtime 详解
-subtitle:   Runtime 详解
-date:       2017-02-04
-author:     BY
-header-img: img/post-bg-ios9-web.jpg
-catalog: true
-tags:
-    - Obj-C
-    - Runtime
-    - iOS
---- 
+
 
 # 前言
 >最近在学习Runtime的知识，恰巧发现了这篇博客[《Objective-C Runtime》](http://yulingtianxia.com/blog/2014/11/05/objective-c-runtime/)，在此基础上，进行了些许补充说明,如有错误或其他想法，欢迎提出交流。
