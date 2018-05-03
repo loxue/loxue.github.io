@@ -1,7 +1,7 @@
 
 ## 正文
 
-面试时面试官出了一道面试题：下面代码会发生什么问题？
+下面代码会发生什么问题？
 
 ```objc
 @property (nonatomic, strong) NSString *target;
