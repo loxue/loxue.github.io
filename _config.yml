@@ -56,7 +56,7 @@ kramdown:
 # 评论系统
 # Disqus（https://disqus.com/）
 # disqus_username: loxue
- 
+
 # Gitalk
 gitalk:
   enable: true    #是否开启Gitalk评论
@@ -91,7 +91,7 @@ tags:
   - CocoaPods
   - python
   - shell
-  - ruby
+  - C
 
 
 
