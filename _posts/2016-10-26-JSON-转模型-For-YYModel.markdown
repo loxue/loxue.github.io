@@ -62,3 +62,5 @@ Model *model = [[Model alloc] init];
 ```
 
 到此，简便快速的完成了JSON到模型的转换。
+
+

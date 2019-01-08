@@ -16,7 +16,7 @@ resume: true
 resume-external: true
 resume-url: https://google.com/?q=my+resume
 
-url: https://borago.top
+url: https://louxe.github.io
 # your url: http://USERNAME.github.io
 
 permalink: /:title/
@@ -30,25 +30,28 @@ permalink: /:title/
 
 # if you don't want comments in your posts, leave categories empty
 disqus:
-  shortname: mydisqus # enter this from your disqus account
+  shortname: loxue # enter this from your disqus account
   categories: [blog, project] # only show disqus for posts that have these categories
+disqus:
+    username:
+# https://imsun.net/posts/gitment-introduction/
 
 # if you don't have any of social below, comment the line
 # facebook: myfacebook
-twitter: inTJ
-google: pugssur@gmail.com
+twitter: pugssur
+google: 111560375500102348892
 # instagram: myinstagram
 # pinterest: mypinterest
 # linkedin: mylinkedin
 # youtube: myyoutube
 # spotify: myspotify
-github: mygithub
+github: loxue
 # gitlab: mygitlab
 # lastfm: mylastfm
-# stackoverflow: 7044681/mystackoverflow
+stackoverflow: 3312863/soulland
 # quora: userquora
 # reddit: username
-medium: medium
+# medium: medium
 # vimeo: myvimeo
 # lanyrd: mylanyrd
 email: pugssur@gmail.com
@@ -59,7 +62,7 @@ authors:
         bio: A single spark can start a prairie fire.
         external-image: false
         picture: assets/images/profile.jpg
-        twitter: inTJ
+        twitter: pugssur
 
 # do you want a larger site? change the option below
 # options: [normal, large] | default: normal
