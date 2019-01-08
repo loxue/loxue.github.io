@@ -1,124 +1,106 @@
+# main text of home
+name: ZeroJ
+bio: Mycccc的blog
 
-baseurl:
+# twitter summary info
+description: A single spark can start a prairie fire.
+
+# if it's an external image, update below for true
+# better with square images
+external-image: false
+picture: assets/images/profile.jpg
+
+# If you want to include your resume, set to true
+# and specify source (external or local).
+resume: true
+resume-external: true
+resume-url: https://google.com/?q=my+resume
+
 url: https://borago.top
-date_format: "ordinal"
-title: 十月陨箨
-subtitle: "打码改变人生"
-description: "A single spark can start a prairie fire."
-keywords: Mycccc
-timezone: Asia/Shanghai
-encoding: "utf-8"
-side_bar_repo_limit: 5
-theme: jekyll-theme-cayman
+# your url: http://USERNAME.github.io
 
-# ---------------- #
-#      Author      #
-# ---------------- #
-author: loxue
-organization: borago.top
-organization_url: http://borago.top
-github_username: loxue
-location: Beijing, China
+permalink: /:title/
+
+# To enable google analytics, supply your token below
+# analytics-google: 'UA-MYANALYTICS'
+
+# To enable piwik tracking, supply your url & site ID below
+# analytics-piwik-url: 'piwik.my-host.com'
+# analytics-piwik-id: 1
+
+# if you don't want comments in your posts, leave categories empty
+disqus:
+  shortname: mydisqus # enter this from your disqus account
+  categories: [blog, project] # only show disqus for posts that have these categories
+
+# if you don't have any of social below, comment the line
+# facebook: myfacebook
+twitter: inTJ
+google: pugssur@gmail.com
+# instagram: myinstagram
+# pinterest: mypinterest
+# linkedin: mylinkedin
+# youtube: myyoutube
+# spotify: myspotify
+github: mygithub
+# gitlab: mygitlab
+# lastfm: mylastfm
+# stackoverflow: 7044681/mystackoverflow
+# quora: userquora
+# reddit: username
+medium: medium
+# vimeo: myvimeo
+# lanyrd: mylanyrd
 email: pugssur@gmail.com
 
-# ---------------- #
-#    Navigation    #
-# ---------------- #
-navs:
-  -
-    href: /
-    label: 首页
+authors:
+    johndoe:
+        name: loxue
+        bio: A single spark can start a prairie fire.
+        external-image: false
+        picture: assets/images/profile.jpg
+        twitter: inTJ
 
-  -
-    href: /categories/
-    label: 分类
+# do you want a larger site? change the option below
+# options: [normal, large] | default: normal
+# normal = 560px / large = 810px
+width: normal
 
-#   -
-#     href: /archives/
-#     label: 归档
+# if you don't need pagination, comment the *paginate* configs below
+# paginate: 5
+# paginate_path: "blog/:num/"
 
-  -
-    href: /wiki/
-    label: 维基
+# if you don't need projects, comment the *projects* configs below
+projects: true
 
-  -
-    href: /links/
-    label: 链接
+# if you don't need "about" or "blog", comment them out below
+about: true
+blog: true
 
-  -
-    href: /about/
-    label: 关于
+# do you want to show the "read time" of the posts?
+read-time: true
 
-# ---------------- #
-#       RSS        #
-# ---------------- #
-subscribe_rss: /feed.xml
+# do you want to show the "tags" inside the posts?
+show-tags: true
 
-# ---------------- #
-#      Jekyll      #
-# ---------------- #
-markdown: kramdown
-kramdown:
-    input: GFM
-highlighter: rouge
-paginate: 10
-lsi: false
-quiet: false
-excerpt_separator: "\n\n"
-permalink: /:year/:month/:day/:title/
-gems:
-    - jekyll-github-metadata
-    - rouge
-#     - jekyll-html-pipeline
-    - jekyll-paginate
-    - jekyll-sitemap
-    - jekyll-feed
-    - jemoji
-#     - jekyll-mentions
-collections:
-    wiki:
-        output: true
-        permalink: /wiki/:path/
+# related posts inside a post?
+related: true
 
-repository: louxe/loxue.github.io
+# Display links for next and previous posts for the specified categories
+post-advance-links: [blog]
 
-# ---------------- #
-#      Comments    #
-# ---------------- #
-# support provider: disqus, gitment, gitalk
-comments_provider: gitalk
-# !!!重要!!! 请修改下面这些信息为你自己申请的
-# !!!Important!!! Please modify infos below to yours
-# https://disqus.com
-disqus:
-    username:
-# https://imsun.net/posts/gitment-introduction/
-gitment:
-    owner: loxue
-    repo: blog-comments
-    oauth:
-        client_id: 8eabb8c586e79c0631af
-        client_secret: 6e18b52456c1f0b0bf0e96a64eee82cd1f2f9c2b
-# https://github.com/gitalk/gitalk#install
-gitalk:
-    owner: loxue
-    repo: blog-comments
-    clientID: 8eabb8c586e79c0631af
-    clientSecret: 6e18b52456c1f0b0bf0e96a64eee82cd1f2f9c2b
-# 在使用其它评论组件时可点击显示 Disqus
-lazy_load_disqus : false
+# show author block at the end of a post ?
+show-author: true
 
-# ---------------- #
-#      Search      #
-# ---------------- #
-simple_jekyll_search:
-    # 是否支持全文搜索
-    fulltext: false
-    # 最多显示多少条搜索结果
-    limit: 10
+# do you want some animations?
+animation: true
 
-# ---------------- #
-#    Analytics     #
-# ---------------- #
-google:
-    analytics_id: UA-131919853-1
+plugins:
+  - jekyll-seo-tag
+  - jekyll-gist
+  - jekyll-feed
+  - jemoji
+  - jekyll-admin
+
+jekyll-mentions:
+    base_url: https://github.com
