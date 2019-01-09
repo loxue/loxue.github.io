@@ -5,7 +5,7 @@ welcome_message: <a href="https://github.com/loxue/loxue.github.io" target="_bla
 description: Mycccc.blog.
 creator: <a href="http://borago.top">@loxue</a>
 
-url: "http://vno.onevcat.com"
+url: "https://borago.top"
 
 permalink: /:year/:month/:title/
 
@@ -13,7 +13,7 @@ permalink: /:year/:month/:title/
 highlighter: rouge
 
 # supported colors: blue, green, purple, red, orange or slate. If you need clear, leave it empty.
-cover_color: red
+cover_color: white
 
 # The blog button should not be removed.
 blog_button:
@@ -22,7 +22,7 @@ blog_button:
 
 # Navigation buttons in the front page.
 nav:
-    - {title: Projects, description: My Projects, url: 'http://project.onevcat.com'}
+    - {title: Projects, description: My Projects, url: 'https://borago.top'}
     # - {title: Another Button, description: A button, url: 'http://example.com'}
 
 # Pagination
@@ -37,7 +37,7 @@ comment:
 
 # Social
 social:
-    weibo: __Spark
+    weibo: 207412396
     github: louxe
     twitter: pugssur
     gplus: 111560375500102348892
