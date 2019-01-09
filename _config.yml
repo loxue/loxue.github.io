@@ -1,9 +1,9 @@
 # Basic
-title: Vno Jekyll
-subtitle: A blog-orientation theme for Jekyll
-welcome_message: <a href="https://github.com/onevcat/vno-jekyll" target="_blank">Download the theme</a>
-description: Vno Jekyll is a port of my Ghost theme vno.
-creator: <a href="http://onev.cat">@onevcat</a>
+title: 十月陨箨
+subtitle: A single spark can start a prairie fire
+welcome_message: <a href="https://github.com/loxue/loxue.github.io" target="_blank">Download the theme</a>
+description: Mycccc.blog.
+creator: <a href="http://borago.top">@loxue</a>
 
 url: "http://vno.onevcat.com"
 
@@ -32,16 +32,16 @@ paginate_path: "page/:num/"
 
 # Comment
 comment:
-    disqus: vno-jekyll
-    # duoshuo: 
-    
+    disqus: loxue
+    # duoshuo:
+
 # Social
 social:
-    weibo: onevcat
-    github: onevcat
-    twitter: onevcat
-    gplus: 107108267983477358170
-    mail: onev@onevcat.com
+    weibo: __Spark
+    github: louxe
+    twitter: pugssur
+    gplus: 111560375500102348892
+    mail: pugssur@gmail.com
 
 # Google Analytics
 ga:
