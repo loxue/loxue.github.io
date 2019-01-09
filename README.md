@@ -14,7 +14,7 @@
 
 ## Demo
 
-**[在线预览 &rarr;](https://borago.org)**
+**[在线预览 &rarr;](https://borago.top)**
 
 ## Fork指南
 
