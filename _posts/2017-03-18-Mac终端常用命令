@@ -1,0 +1,258 @@
+Mac终端命令
+
+文件目录
+
+1. " / "  ：根目录
+2. " ~ " ：用户主目录的缩写。例如当前用户为hello，那么" ~ "展开来就是：/Users/hello
+3. " . "  ：当前目录
+4. ".."   ：父目录
+   
+
+命令
+
+1. cd 跳转到某个目录
+
+1. cd /Users/apple/Desktop 
+   有个小技巧，就是在输入目录如Desktop时，只要输入Des并按tab键，该目录名便自动补全了。其中
+   - cd /   表示跳转到根目录。
+   - cd ~   表示跳转到用户主目录。
+   - cd ~apple   表示跳转到用户apple的主目录。
+   - cd ..   表示跳转到上级目录。（cd和..之间的空格不能漏）2.ls 列出当前目录下的子目录和文件例如：
+
+	$ ls  
+
+		Desktop     Downloads   Movies      Pictures    build  	
+
+		Documents   Library     Music       Public       
+
+
+
+1. pwd 显示当前目录的路径
+   - 为了验证上面所说的几个特殊目录的路径，我们可以用pwd命令将其输出看看。例如：
+   1. cd /
+   2. pwd  
+   3. / 
+   4. cd ~
+   5. pwd
+   6. /Users/apple
+   7. cd ./Desktop
+   8. cd ..
+   9. pwd
+   10. /Users/apple
+   11. cd ./Desktop/Test/
+   12. pwd
+   13. /Users/apple/Desktop/Test
+   14. cd ~apple/
+   15. pwd
+   16. /Users/apple
+
+
+
+1. clear 清空当前输入
+   如果Terminal窗口中的内容太多了，可以用clear命令将其清空。
+
+
+
+1. history 查看输入历史记录
+   - 在Terminal输入命令时，可以使用上下方向键查看之前输入的命令（和windows的cmd相同）
+   - 可以用history查看输入的完整历史
+     例如我的Terminal中的部分历史记录输出如下：
+       0  ./init-ios.sh
+       1  cd ..
+       2  pwd
+       3  ./init-ios.sh
+       4  netstat -an
+       5  ping www.baidu.com
+       6  du
+       7  clear
+       8  whoami
+       9  who
+       10  env
+       11  uname
+       12  pwd
+       13  cd Desktop
+       14  ls -l
+       15  nl 2.c
+       16  vi 2.c
+
+
+
+1. ls 列出文件
+   ls 参数 目录名
+   - ls /Users/Library/
+参数 
+     -w 显示中文
+     -l 详细信息
+     -a 包括隐藏文件
+   - 转换目录 cd
+     cd /System/Library
+   - 建立新目录
+     mkdir 目录名
+     在驱动目录下建一个备份目录
+     backup     mkdir /System/Library/Extensions/backup
+     在桌面上建一个备份目录 
+     ckup    mkdir /User/用户名/Desktop/backup
+     
+
+1. cp 拷贝文件
+   cp 参数 源文件 目标文件
+   - 把桌面的test.c 拷贝到桌面test文件夹中
+     cp -R /User/用户名/Desktop/test.c  /Users/用户名/Desktop/test
+     参数R表示对目录进行递归操作。
+   	
+   - 把驱动目录下的所有文件备份到桌面
+     backup
+cp -R /System/Library/Extensions/* /User/用户名/Desktop/backup
+
+
+
+1. rm 删除文件
+   - 想删除驱动的缓存  
+     rm -rf /System/Library/Extensions.kextcache
+     rm -rf /System/Library/Extensions.mkext
+      参数－rf 表示递归和强制，千万要小心使用，如果执行了 rm -rf / 你的系统就全没了
+
+
+
+1. mv 移动文件
+   - 把test.text 从文稿里面移到桌面    
+     cd /Users/用户名/Documents/
+     mv test.text  /User/用户名/Desktopz
+
+ 
+
+1. nano 文本编辑
+   - 编辑 Info.plist
+     nano  /Users/用户名/Desktop/Info.plist
+
+
+
+1. 目录操作
+     - 命令名 -	 - 功能描述 -  	   - 举例说明 -    
+      mkdir 	  创建一个目录   	 mkdir dirname 
+      rmdir 	  删除一个目录   	 rmdir dirname 
+      mvdir 	移动或者重命名一个目录	mvdir dir1 dir2
+       cd   	  改变当前目录   	  cd dirname   
+       pwd  	 显示当前目录名字  	      pwd      
+       ls   	 显示当前目录内容  	ls -a/-l/-s/-w 
+   
+2. 文件操作
+   - 文件操作
+     - 命令名 -	 - 功能描述 -  	        - 举例说明 -         
+       cat  	  显示或连接文件  	      cat filename       
+       od   	显示非文本文件的内容 	     od -c filename      
+       cp   	  复制文件或目录  	     cp file1 file2      
+       rm   	  删除文件或目录  	       rm filename       
+       mv   	 改变文件名所在目录 	     mv file1 file2      
+      find  	使用匹配表达式查找文件	find . -name "*.c" -print
+      file  	  显示文件类型   	      file filename      
+   - 选择操作
+     - 命令名 -	   - 功能描述 -   	     - 举例说明 -      
+      head  	   显示文件的头几行   	 head -20 filename 
+      tail  	   显示文件的尾几行   	 tail -15 filename 
+       cut  	 显示文件每行中的某些阈  	      cut -f1      
+      colrm 	 从标准输入中删除若干列  	 colrm 8 20 file2  
+      diff  	 比较并显示两个文件的差异 	 diff file1 file2  
+      sort  	   排序或归并文件    	sort -d -f -u file1
+      uniq  	  去掉文件中的重复行   	 uniq file1 file2  
+       wc   	统计文件的字符数、词数和行数	    wc filename    
+       nl   	   给文件添加行号    	  nl file1 >file2  
+   
+3. 进程操作
+     - 命令名 -	- 功能描述 -	  - 举例说明 -   
+       ps   	显示当前进程状态	    ps u     
+      kill  	  终止进程  	kill -9 30142
+   
+4. 进程操作
+   - 时间操作
+   	命令名 			功能描述 						使用举例
+	date 			显示系统的当前日期和时间 			date
+	cal 				显示日历 						cal 8 1996
+	time 			统计程序的执行时间				time a.out
+   - 网络与通信操作
+命令名 			功能描述 						使用举例
+telnet 			远程登录 						telnet hpc.sp.net.edu.cn
+rlogin 			远程登录							rlogin hostname -l username
+rsh 				在远程主机执行指定命令			rsh f01n03 date
+ftp 				在本地主机与远程主机之间传输文件 	ftpftp.sp.net.edu.cn
+rcp				在本地主机与远程主机 之间复制文件	rcp file1 host1:file2
+ping 			给一个网络主机发送 回应请求 		ping hpc.sp.net.edu.cn
+mail 			阅读和发送电子邮件	 			mail
+write 			给另一用户发送报文 				write username pts/1
+mesg 			允许或拒绝接收报文 				mesg n
+   - Korn Shell 命令
+命令名 			功能描述 						使用举例
+history                    列出最近执行过的 几条命令及编号     history
+r                               重复执行最近执行过的 某条命令         r -2
+alias                        给某个命令定义别名                             alias del=rm -i
+unalias                    取消对某个别名的定义                         unalias del
+
+1. 其它命令
+     - 命令名 -	    - 功能描述    	  - 使用举例 -  
+      uname 	 显示操作系统的有关信息  	  uname -a  
+      clear 	  清除屏幕或窗口内容   	   clear    
+       env  	显示当前所有设置过的环境变量	    env     
+       who  	 列出当前登录的所有用户  	    who     
+     whoami 	显示当前正进行操作的用户名 	   whoami   
+       tty  	 显示终端或伪终端的名称  	    tty     
+      stty  	  显示或重置控制键定义  	  stty -a   
+       du   	   查询磁盘使用情况   	du -k subdir
+     
+                         
+
+Mac OS X开启终端命令功能
+
+1. 显示资源库
+   - 方法一：
+     显示
+终端输入：chflags nohidden ~/Library/
+     
+     隐藏
+     终端输入：chflags hidden ~/Library/
+   - 方法二
+     打开Finder，菜单中选择前往按住option键就会显示资源库项(每次打开都需要重复操作一次)。
+
+1. 显示隐藏文件
+   - 在“终端”中输入下面的命令：
+     defaults write com.apple.finder AppleShowAllFiles -bool true
+killall Finder恢复隐藏文件
+在“终端”中输入下面的命令：
+defaults write com.apple.finder AppleShowAllFiles -bool false
+killall Finder
+
+1. Xcode卸载
+   - 终端输入：
+      (实际安装目录) : sudo /Library/uninstall-devtools –mode=all
+     
+      (默认情况下Xcode安装在/Developer目录下) : 
+sudo /Developer/Library/uninstall-devtools –mode=all
+
+1. 在Finder标题栏显示完整路径
+   - 终端输入：
+     defaults write com.apple.finder _FXShowPosixPathInTitle -bool YES
+killall Finder
+
+1. 去掉窗口截屏的阴影
+   - 截屏：command+shift+4     —>   得到的图片自动增加一圈阴影
+   - 去除阴影效果：
+     终端输入：
+     defaults write com.apple.screencapture disable-shadow -bool true
+     killall SystemUIServer
+
+1. 强制Safari在新标签中打开网页
+   - Safari是默认支持标签浏览的。但是，我们在页面上点击链接或者在其他应用程序中点击链接的时候，
+Safari往往是打开了一个新的窗口，导致页面上的Safari窗口过多，不好管理。通过下面这个小窍门，
+我们可以让Safari默认是在一个新标签中打开网页。
+     终端输入命令：
+defaults write com.apple.Safari TargetedClicksCreateTabs -bool true
+
+1. 改变截屏图片的保存位置
+   - Xcode截屏图片默认保存桌面位置
+   - 修改默认保存位置
+     - 终端输入：
+       defaults write com.apple.screencapture location 存放位置
+       killall SystemUIServer
+     - 输入命令同时，将”存放位置“替换为真正的文件。（例如：存放在桌面test文件夹下）
+       defaults write com.apple.screencapture location ~/test
+
+
