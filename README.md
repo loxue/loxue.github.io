@@ -1,6 +1,6 @@
 # Mycccc
 
-我的个人博客：<https://borago.org>，欢迎 Star 和 Fork。
+我的个人博客：<https://borago.top>，欢迎 Star 和 Fork。
 
 ## 概述
 
